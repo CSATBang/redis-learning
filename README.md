@@ -45,9 +45,13 @@ list
 #字符串操作
 
 SET key value                   # 设置指定key的值
+
 GET key                         # 获取指定key的值
+
 MSET key value [key value...]   # 同时设置多个key-value对
+
 MGET key [key...]               # 获取所有给定key的值
+
 
 ```redis
 # 基础字符串操作
@@ -64,10 +68,15 @@ OK
 ```
 
 GETSET key value                # 设置新值并返回旧值
+
 STRLEN key                      # 返回key所储存的字符串值的长度
+
 APPEND key value                # 将value追加到key原来的值的末尾
+
 GETRANGE key start end          # 返回key中字符串值的子字符
+
 SETRANGE key offset value       # 用value参数覆写给定key所储存的字符串值
+
 
 ```redis
 # 字符串操作
@@ -90,10 +99,15 @@ OK
 #数值操作
 
 INCR key                        # 将key中储存的数字值增一
+
 DECR key                        # 将key中储存的数字值减一
+
 INCRBY key increment            # 将key所储存的值加上给定的增量值
+
 DECRBY key decrement            # 将key所储存的值减去给定的减量值
+
 INCRBYFLOAT key increment       # 将key所储存的值加上给定的浮点增量值
+
 
 ```
 # 数值操作
@@ -116,8 +130,11 @@ OK
 #条件设置
 
 SETEX key seconds value         # 设置值并指定过期时间(秒)
+
 PSETEX key milliseconds value   # 设置值并指定过期时间(毫秒)
+
 SETNX key value                 # 只有在key不存在时设置key的值
+
 
 ```
 # 条件设置
@@ -152,8 +169,11 @@ OK
 #插入操作
 
 LPUSH key value [value...]      # 将一个或多个值插入到列表头部
+
 RPUSH key value [value...]      # 将一个或多个值插入到列表尾部
+
 LINSERT key BEFORE|AFTER pivot value  # 在列表的元素前或后插入元素
+
 
 ```redis
 127.0.0.1:6379> LPUSH mylist "first"
@@ -171,8 +191,11 @@ LINSERT key BEFORE|AFTER pivot value  # 在列表的元素前或后插入元素
 #查询操作
 
 LRANGE key start stop           # 获取列表指定范围内的元素
+
 LLEN key                        # 获取列表长度
+
 LINDEX key index                # 通过索引获取列表中的元素
+
 
 ```
 # 查询操作
@@ -193,9 +216,13 @@ LINDEX key index                # 通过索引获取列表中的元素
 #弹出操作
 
 LPOP key                        # 移除并获取列表的第一个元素
+
 RPOP key                        # 移除并获取列表的最后一个元素
+
 BLPOP key [key...] timeout      # 阻塞式移出并获取列表的第一个元素
+
 BRPOP key [key...] timeout      # 阻塞式移出并获取列表的最后一个元素
+
 
 ```
 # 弹出操作
@@ -221,8 +248,11 @@ BRPOP key [key...] timeout      # 阻塞式移出并获取列表的最后一个�
 #删除操作
 
 LREM key count value            # 移除列表元素
+
 LTRIM key start stop            # 对一个列表进行修剪
+
 LSET key index value            # 通过索引设置列表元素的值
+
 
 ### LREM key count value
 
@@ -417,8 +447,11 @@ SREM key member1 [member2 member3...]
 ### 查询操作
 
 SMEMBERS key           # 获取所有元素
+
 SISMEMBER key member   # 判断元素是否存在
+
 SCARD key              # 获取元素数量
+
 
 ```
 127.0.0.1:6379> SMEMBERS tags
@@ -435,7 +468,9 @@ SCARD key              # 获取元素数量
 ### 随机操作
 
 SRANDMEMBER key [count]    # 随机获取元素（不删除）
+
 SPOP key [count]           # 随机弹出元素（会删除）****
+
 
 ```
 127.0.0.1:6379> SADD lottery "user1" "user2" "user3" "user4" "user5"
@@ -458,6 +493,7 @@ SPOP key [count]           # 随机弹出元素（会删除）****
 
 SDIFF key1 [key2 key3...]     # 在key1中，但不在其他key中的元素
 
+
 ```
 127.0.0.1:6379> SADD set1 A B C D
 (integer) 4
@@ -475,6 +511,7 @@ SDIFF key1 [key2 key3...]     # 在key1中，但不在其他key中的元素
 
 SINTER key1 [key2 key3...]    # 在所有key中都存在的元素
 
+
 ```
 127.0.0.1:6379> SADD user:1:tags sports music tech
 (integer) 3
@@ -489,6 +526,7 @@ SINTER key1 [key2 key3...]    # 在所有key中都存在的元素
 
 SUNION key1 [key2 key3...]    # 所有key中的元素（去重）
 
+
 ```
 127.0.0.1:6379> SUNION set1 set2
 1) "A"
@@ -502,8 +540,11 @@ SUNION key1 [key2 key3...]    # 所有key中的元素（去重）
 ### 存储运算结果
 
 SDIFFSTORE destination key1 [key2...]   # 存储差集结果
+
 SINTERSTORE destination key1 [key2...]  # 存储交集结果
+
 SUNIONSTORE destination key1 [key2...]  # 存储并集结果
+
 
 ```
 127.0.0.1:6379> SINTERSTORE common_tags user:1:tags user:2:tags
@@ -625,9 +666,12 @@ Hash 是 field-value 映射表，适合存储对象
 
 HSET key field value [field value ...] #设置字段值（新版可批量）
 
+
 HGET key field #获取字段值
 
+
 HGETALL key #获取所有字段和值
+
 
 ```
 127.0.0.1:6379> HSET user:1000 name "Alice" age 30 email "alice@example.com"
@@ -647,7 +691,9 @@ HGETALL key #获取所有字段和值
 
 HMGET key field1 [field2 field3...]    # 批量获取多个字段
 
+
 #tips:HMSET 已不推荐，直接用 HSET 替代
+
 
 ```
 127.0.0.1:6379> HMGET user:1000 name age email
@@ -659,6 +705,7 @@ HMGET key field1 [field2 field3...]    # 批量获取多个字段
 ### 删除操作
 
 HDEL key field1 [field2 field3...]    # 删除一个或多个字段
+
 
 ```
 127.0.0.1:6379> HDEL user:1000 email
@@ -675,10 +722,15 @@ HDEL key field1 [field2 field3...]    # 删除一个或多个字段
 ### 字段查询
 
 HEXISTS key field      # 判断字段是否存在
+
 HLEN key              # 获取字段数量
+
 HKEYS key             # 获取所有字段名
+
 HVALS key             # 获取所有字段值
+
 HSTRLEN key field     # 获取字段值的字符串长度
+
 
 ```
 127.0.0.1:6379> HEXISTS user:1000 name
@@ -700,9 +752,13 @@ HSTRLEN key field     # 获取字段值的字符串长度
 ### 增减操作
 
 HINCRBY key field increment        # 整数字段增加
+
 HINCRBYFLOAT key field increment   # 浮点数字段增加
+
 #递减使用负值
+
 HINCRBY key field -5              # 递减5
+
 
 ```
 127.0.0.1:6379> HSET product:1001 price 99.99 stock 50
@@ -802,6 +858,7 @@ HINCRBY key field -5              # 递减5
 
 HSCAN key cursor [MATCH pattern] [COUNT count]
 
+
 ````
 127.0.0.1:6379> HSCAN user:1000 0 MATCH "name*" COUNT 10
 ````
@@ -835,9 +892,12 @@ Sorted Set 是 **带分数排序** 的 Set
 
 ZADD key [NX|XX] [GT|LT] [CH] [INCR] score1 member1 [score2 member2...] #添加元素（可批量）
 
+
 ZRANGE key start stop [WITHSCORES] #按索引范围查询
 
+
 ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count] #按分数范围查询
+
 
 ````
 127.0.0.1:6379> ZADD leaderboard 1000 "player1" 1500 "player2" 800 "player3"
@@ -861,7 +921,9 @@ ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count] #按分数范围查�
 #反向范围查询
 
 ZREVRANGE key start stop [WITHSCORES]
+
 ZREVRANGEBYSCORE key max min [WITHSCORES] [LIMIT offset count]
+
 
 ````
 127.0.0.1:6379> ZREVRANGE leaderboard 0 -1 WITHSCORES  # 从高到低
@@ -878,10 +940,15 @@ ZREVRANGEBYSCORE key max min [WITHSCORES] [LIMIT offset count]
 ### 分数和排名
 
 ZSCORE key member          # 获取元素分数
+
 ZCARD key                  # 获取元素数量
+
 ZCOUNT key min max         # 分数范围内的元素数量
+
 ZRANK key member           # 获取元素排名（从低到高）
+
 ZREVRANK key member        # 获取元素排名（从高到低）
+
 
 ````
 127.0.0.1:6379> ZSCORE leaderboard "player1"
@@ -899,8 +966,11 @@ ZREVRANK key member        # 获取元素排名（从高到低）
 ## 删除操作
 
 ZREM key member [member...]                    # 删除元素
+
 ZREMRANGEBYRANK key start stop                # 按排名范围删除
+
 ZREMRANGEBYSCORE key min max                  # 按分数范围删除
+
 
 ````
 127.0.0.1:6379> ZREM leaderboard "player3"
@@ -915,6 +985,7 @@ ZREMRANGEBYSCORE key min max                  # 按分数范围删除
 
 ZINCRBY key increment member    # 增加元素分数
 
+
 ````
 127.0.0.1:6379> ZINCRBY leaderboard 200 "player1"  # player1增加200分
 "1200"
@@ -925,7 +996,9 @@ ZINCRBY key increment member    # 增加元素分数
 ## 集合运算
 
 ZINTERSTORE destination numkeys key [key...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]
+
 ZUNIONSTORE destination numkeys key [key...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]
+
 
 ````
 127.0.0.1:6379> ZADD game1 100 "player1" 200 "player2"
