@@ -3,8 +3,7 @@ Redis 命令学习笔记
 [redis-commands.md](https://github.com/user-attachments/files/22744501/redis-commands.md)
 # Redis 数据类型操作大全
 
-[TOC]
-
+[toc]
 
 
 ## 1、String（字符串）操作
