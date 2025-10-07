@@ -15,11 +15,17 @@ Redis 命令学习笔记
 #键管理
 
 KEYS pattern                    # 查找所有符合给定模式的key
+
 TYPE key                        # 返回key所存储的值的类型
+
 DEL key [key...]                # 删除一个或多个key
+
 EXISTS key                      # 检查key是否存在
+
 EXPIRE key seconds              # 为key设置过期时间
+
 TTL key                         # 查看key的剩余过期时间
+
 
 ```redis
 # 键管理
